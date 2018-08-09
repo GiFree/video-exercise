@@ -15,7 +15,6 @@ router.post('/login', credentials, (req, res, next) => {
       return res.status(400).json({ error: { password: 'wrong password' } });
     })
     .catch((err) => {
-      console.log(err.message);
       return res.status(400).json({ error: { user: 'not found' } });
     });
 });
@@ -33,10 +32,13 @@ router.post('/add', credentials, (req, res, next) => {
     });
 });
 
+router.get('/id', auth, (req, res, next) => {
+  return res.status(200).json({ id: req.user.id });
+});
+
 router.get('/favorites', auth, (req, res, next) => {
   User.findById(req.user.id)
     .then((user) => {
-      console.log(user);
       return res.status(200).json({ favorites: user.favorites });
     })
     .catch((err) => {

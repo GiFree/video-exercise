@@ -40,6 +40,7 @@ const fetch = async (id) => {
     likes: data.items[0].statistics.likeCount,
     thumbnailUrl: data.items[0].snippet.thumbnails.default.url,
     createdAt: new Date(),
+    url: `https://www.youtube.com/watch?v=${data.items[0].id}`,
   }
 }
 

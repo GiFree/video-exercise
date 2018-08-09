@@ -28,13 +28,13 @@ const fetch = async (id) => {
   }
 
   const data = await request(options);
-  console.log(data);
   return {
     title: data.name,
     views: data.stats.plays || 0,
     likes: data.metadata.connections.likes.total,
     thumbnailUrl: data.pictures.sizes[0].link,
     createdAt: new Date(),
+    url: `https://vimeo.com/${id}`,
   }
 }
 

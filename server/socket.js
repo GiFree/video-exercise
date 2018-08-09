@@ -5,8 +5,9 @@ const configSocket = (server) => {
 
   io.on('connection', (socket) => {
 
-    socket.on('addVideo', (video) => {
-      socket.broadcast.emit('newVideo', video);
+    socket.on('video', (video) => {
+      socket.broadcast.emit('video', video);
+      socket.emit(video, video);
     });
   });
 

@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     likes: DataTypes.INTEGER,
     thumbnailUrl: DataTypes.STRING,
+    url: DataTypes.STRING,
     createdAt: {
       type: DataTypes.DATE
     }

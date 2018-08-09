@@ -1,6 +1,6 @@
 const express = require('express');
 const faker = require('faker');
-const { Video } = require('../../sequelize');
+const { Video, User } = require('../../sequelize');
 
 const router = express.Router();
 
@@ -11,11 +11,15 @@ router.post('/', (req, res, next) => {
       title: faker.company.companyName(),
       views: faker.random.number(),
       likes: faker.random.number(),
-      thumbnailUrl: faker.image.imageUrl(),
+      thumbnailUrl: 'https://i.ytimg.com/vi/v2AC41dglnM/default.jpg',
       createdAt: faker.date.recent(),
+      url: 'https://www.youtube.com/watch?v=JmcA9LIIXWw'
     };
 
     promises.push(Video.create(video));
+
+    promises.push(User.create({ username: 'user', hash: 'pass' }));
+
   }
 
   Promise.all(promises)
@@ -23,7 +27,6 @@ router.post('/', (req, res, next) => {
       res.status(200).json({ success: true, message: 'created 25 fake videos' });
     })
     .catch((err) => {
-      console.log(err);
       res.status(500).send({
         success: false, error:
           { message: 'something went wrong' },
