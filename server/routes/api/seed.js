@@ -18,8 +18,6 @@ router.post('/', (req, res, next) => {
 
     promises.push(Video.create(video));
 
-    promises.push(User.create({ username: 'user', hash: 'pass' }));
-
   }
 
   Promise.all(promises)
