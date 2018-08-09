@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
+import { AuthService } from '../auth.service';
+
 export interface DialogData {
   login: string;
   password: string;
@@ -15,7 +17,8 @@ export class LoginComponent implements OnInit {
   login: string;
   password: string;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,
+    private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -27,8 +30,19 @@ export class LoginComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if (result && result.login && result.password) {
+        this.authService.login(result.login, result.password)
+          .subscribe();
+      }
     });
+  }
+
+  loggedOn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }
 
