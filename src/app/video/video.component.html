@@ -1,5 +1,5 @@
 <mat-card class="card">
-  <img mat-card-image src="{{video.thumbnailUrl}}" alt="unavailable">
+  <img mat-card-image src="{{video.thumbnailUrl}}" alt="unavailable" (click)="watch()">
   <mat-card-content>
     <p>{{video.title}}</p>
     <p>{{video.views}} views</p>
